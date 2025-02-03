@@ -1,0 +1,23 @@
+Docker is a containerization platform that allows you to package applications and their dependencies into isolated containers.
+
+🚀 Key Points About Docker:
+✅ Lightweight → Containers share the same OS kernel, making them faster than VMs.
+✅ Portable → Runs the same way on any system (Linux, Windows, Mac).
+✅ Isolated → Each container has its own environment, preventing conflicts.
+✅ Scalable → Easily spin up multiple containers for microservices.
+
+🔥 How Docker Works?
+Dockerfile → Defines how to build a container.
+Docker Image → A snapshot of the app with all dependencies.
+Docker Container → A running instance of an image.
+Docker Compose → Manages multiple containers in a project.
+🎯 Why Use Docker?
+Consistency → No “it works on my machine” issues.
+Efficiency → Uses fewer resources than traditional VMs.
+Automation → Easily deploy apps with simple commands.
+For your Inception project, Docker helps you:
+✅ Run NGINX, WordPress, and MariaDB in separate containers.
+✅ Keep each service isolated but connected via a Docker network.
+✅ Ensure a stable and reproducible infrastructure.
+
+Would you like a diagram to visualize how Docker works? 🚢
