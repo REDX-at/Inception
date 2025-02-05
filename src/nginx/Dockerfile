@@ -12,8 +12,9 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -out /etc/ssl/certs/nginx-selfsigned.crt \
     -subj "/C=US/ST=State/L=City/O=Company/OU=Org/CN=localhost"
 
-# Copy NGINX configuration
-COPY conf.d/default.conf /etc/nginx/conf.d/default.conf
+# Copy NGINX configuration (Ensure it enforces TLSv1.2 or TLSv1.3)
+COPY conf.d/default.conf /etc/nginx/nginx.conf
 
-# Start NGINX in the foreground
+EXPOSE 443
+
 CMD ["nginx", "-g", "daemon off;"]
