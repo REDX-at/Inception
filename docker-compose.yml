@@ -1,11 +1,12 @@
 version: '3.8'
 
 services:
-  nginx:  # Service name and image name must be the same
-    build: ./nginx  # Build from the custom Dockerfile inside "nginx" folder
+  # ----- nginx -----
+  nginx:
+    build: ./src/nginx 
     container_name: nginx
     ports:
-      - '443:443'  # HTTPS only, assuming TLS is required
+      - '443:443'
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/ssl:/etc/ssl  # Mount SSL certificates if needed
+      - ./src/nginx/conf.d:/etc/nginx/conf.d
+  # ----- nginx -----
