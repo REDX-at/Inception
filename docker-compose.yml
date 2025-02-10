@@ -3,10 +3,48 @@ version: '3.8'
 services:
   # ----- nginx -----
   nginx:
-    build: ./src/nginx 
+    build: ./src/nginx
     container_name: nginx
     ports:
       - '443:443'
     volumes:
       - ./src/nginx/conf.d:/etc/nginx/conf.d
+      - ./src/nginx/certs:/etc/ssl/certs  # Optional: for SSL certificates
+    depends_on:
+      - wordpress
+    restart: always
   # ----- nginx -----
+
+  # ----- wordpress -----
+  wordpress:
+    build: ./src/wordpress
+    container_name: wordpress
+    volumes:
+      - wordpress_data:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: mariadb:3306
+      WORDPRESS_DB_USER: wp_user
+      WORDPRESS_DB_PASSWORD: wp_password
+      WORDPRESS_DB_NAME: wordpress
+    depends_on:
+      - mariadb
+    restart: always
+  # ----- wordpress -----
+
+  # ----- mariadb -----
+  mariadb:
+    build: ./src/mariadb
+    container_name: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wp_user
+      MYSQL_PASSWORD: wp_password
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+  # ----- mariadb -----
+
+volumes:
+  wordpress_data:
+  db_data:
