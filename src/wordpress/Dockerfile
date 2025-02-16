@@ -1,20 +1,24 @@
-FROM debian:bullseye
+FROM debian:11
 
-RUN apt-get update && \
-    apt-get install -y php php-fpm wget tar && \
-    rm -rf /var/lib/apt/lists/*
+# Install required packages (wget and php-fpm)
+RUN apt-get update && apt-get install -y \
+    wget \
+    php-fpm \
+    php-mysqli \
+    php-xml \
+    php-curl \
+    && rm -rf /var/lib/apt/lists/*
 
-# Ensure the /var/www/html directory exists
+# Create the necessary directories
 RUN mkdir -p /var/www/html
 
-# Download and move WordPress files
+# Download and extract WordPress
 RUN wget https://wordpress.org/latest.tar.gz && \
     tar -xvzf latest.tar.gz && \
-    rm latest.tar.gz && \
-    mv wordpress/* /var/www/html && \
-    rm -rf wordpress
+    mv wordpress/* /var/www/html/ && \
+    rm -rf wordpress latest.tar.gz
 
+# Expose port 9000 for php-fpm
 EXPOSE 9000
 
-# Start php-fpm with the full path
-CMD ["/usr/sbin/php-fpm7.4", "-F"]
+CMD ["php-fpm7.4", "-F"]
