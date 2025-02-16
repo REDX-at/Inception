@@ -97,3 +97,68 @@ docker-compose up
 
 OU: Organizational unit (department).
 CN: Common Name (usually the domai
+
+  # # ----- mariadb -----
+  # mariadb:
+  #   build: ./src/mariadb
+  #   container_name: mariadb
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: rootpassword
+  #     MYSQL_DATABASE: wordpress
+  #     MYSQL_USER: wp_user
+  #     MYSQL_PASSWORD: wp_password
+  #   volumes:
+  #     - db_data:/var/lib/mysql
+  #   restart: always
+  # # ----- mariadb -----
+
+  inception git:(master) ✗ docker network inspect inception_mynetwork
+[
+    {
+        "Name": "inception_mynetwork",
+        "Id": "6e7270daefe5682ea6fcface0c389c73e27d42b195afbf540a12bcd4cb3fd5d8",
+        "Created": "2025-02-16T15:52:58.258154696Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.29.0.0/16",
+                    "Gateway": "172.29.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "d286fa44de0a550e65079b11f36e2c72c5e7dcb36c1e5a662a80a1129bae4510": {
+                "Name": "nginx",
+                "EndpointID": "4fc3f91b34b74fb1757315c714c3767691b2f82a70410dcb908b2d66c64de20f",
+                "MacAddress": "02:42:ac:1d:00:03",
+                "IPv4Address": "172.29.0.3/16",
+                "IPv6Address": ""
+            },
+            "eda089bacd8f7b79d336ccef0ae318e2a15cd50af04b8b799529ffc01aef4ead": {
+                "Name": "wordpress",
+                "EndpointID": "17252152bd1d385b76e19e91f408f11c9b3174a1b2412fec6427a7785d592997",
+                "MacAddress": "02:42:ac:1d:00:02",
+                "IPv4Address": "172.29.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {
+            "com.docker.compose.network": "mynetwork",
+            "com.docker.compose.project": "inception",
+            "com.docker.compose.version": "2.13.0"
+        }
+    }
+]

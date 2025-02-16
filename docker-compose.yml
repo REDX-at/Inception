@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.7'
 
 services:
   # ----- nginx -----
@@ -9,39 +9,34 @@ services:
       - '443:443'
     volumes:
       - ./src/nginx/conf.d:/etc/nginx/conf.d
-    # depends_on:
-    #   - wordpress
+      - wordpress_data:/var/www/html  # Ensure this is correctly mapped to WordPress' /var/www/html
+    depends_on:
+      - wordpress
     restart: always
+    networks:
+      - mynetwork
   # ----- nginx -----
 
-# ----- wordpress -----
+  # ----- wordpress -----
   wordpress:
-    build: ./src/wordpress  # Build from the Dockerfile in src/wordpress
+    build: ./src/wordpress
     container_name: wordpress
     volumes:
-      - wordpress_data:/var/www/html
+      - wordpress_data:/var/www/html  # WordPress files need to be shared with Nginx
     environment:
       WORDPRESS_DB_HOST: mariadb:3306
       WORDPRESS_DB_USER: wp_user
       WORDPRESS_DB_PASSWORD: wp_password
       WORDPRESS_DB_NAME: wordpress
     restart: always
+    networks:
+      - mynetwork
+    command: ["php-fpm7.4", "-F"] # Ensuring php-fpm runs as expected
   # ----- wordpress -----
 
-  # # ----- mariadb -----
-  # mariadb:
-  #   build: ./src/mariadb
-  #   container_name: mariadb
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: rootpassword
-  #     MYSQL_DATABASE: wordpress
-  #     MYSQL_USER: wp_user
-  #     MYSQL_PASSWORD: wp_password
-  #   volumes:
-  #     - db_data:/var/lib/mysql
-  #   restart: always
-  # # ----- mariadb -----
+networks:
+  mynetwork:
+    driver: bridge
 
 volumes:
   wordpress_data:
-#   db_data:
