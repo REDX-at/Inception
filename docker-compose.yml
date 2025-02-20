@@ -9,34 +9,34 @@ services:
       - '443:443'
     volumes:
       - ./src/nginx/conf.d:/etc/nginx/conf.d
-      - wordpress_data:/var/www/html  # Ensure this is correctly mapped to WordPress' /var/www/html
-    depends_on:
-      - wordpress
+      # - wordpress_data:/var/www/html  # Ensure this is correctly mapped to WordPress' /var/www/html
+    # depends_on:
+    #   - wordpress
     restart: always
     networks:
       - mynetwork
   # ----- nginx -----
 
   # ----- wordpress -----
-  wordpress:
-    build: ./src/wordpress
-    container_name: wordpress
-    volumes:
-      - wordpress_data:/var/www/html  # WordPress files need to be shared with Nginx
-    environment:
-      WORDPRESS_DB_HOST: mariadb:3306
-      WORDPRESS_DB_USER: wp_user
-      WORDPRESS_DB_PASSWORD: wp_password
-      WORDPRESS_DB_NAME: wordpress
-    restart: always
-    networks:
-      - mynetwork
-    command: ["php-fpm7.4", "-F"] # Ensuring php-fpm runs as expected
+  # wordpress:
+  #   build: ./src/wordpress
+  #   container_name: wordpress
+  #   volumes:
+  #     - wordpress_data:/var/www/html  # WordPress files need to be shared with Nginx
+  #   environment:
+  #     WORDPRESS_DB_HOST: mariadb:3306
+  #     WORDPRESS_DB_USER: wp_user
+  #     WORDPRESS_DB_PASSWORD: wp_password
+  #     WORDPRESS_DB_NAME: wordpress
+  #   restart: always
+  #   networks:
+  #     - mynetwork
+  #   command: ["php-fpm7.4", "-F"] # Ensuring php-fpm runs as expected
   # ----- wordpress -----
 
 networks:
   mynetwork:
     driver: bridge
 
-volumes:
-  wordpress_data:
+# volumes:
+#   wordpress_data:

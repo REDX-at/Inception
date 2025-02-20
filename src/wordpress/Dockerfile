@@ -1,17 +1,16 @@
 FROM debian:11
 
-# Install required packages (wget and php-fpm)
+# Install required packages
 RUN apt-get update && apt-get install -y \
     wget \
-    php-fpm \
-    php-mysqli \
-    php-xml \
-    php-curl \
+    php7.4-fpm \
+    php7.4-mysqli \
+    php7.4-xml \
+    php7.4-curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Create the necessary directories
-RUN mkdir -p /var/www/html
-RUN mkdir -p /run/php
+# Create necessary directories
+RUN mkdir -p /var/www/html /run/php
 
 # Download and extract WordPress
 RUN wget https://wordpress.org/latest.tar.gz && \
@@ -19,10 +18,13 @@ RUN wget https://wordpress.org/latest.tar.gz && \
     mv wordpress/* /var/www/html/ && \
     rm -rf wordpress latest.tar.gz
 
-# Configure php-fpm to listen on port 9000
-RUN echo "listen = 9000" >> /etc/php/7.4/fpm/pool.d/www.conf
+# Set permissions (important for WordPress)
+RUN chown -R www-data:www-data /var/www/html
 
-# Expose port 9000 for php-fpm
+# Copy custom PHP-FPM configuration
+COPY custom-www.conf /etc/php/7.4/fpm/pool.d/www.conf
+
+# Expose port 9000 for PHP-FPM
 EXPOSE 9000
 
 # Start PHP-FPM process
