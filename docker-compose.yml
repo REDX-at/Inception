@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  # ----- nginx -----
+  # ----- Nginx -----
   nginx:
     build: ./src/nginx
     container_name: nginx
@@ -9,34 +9,48 @@ services:
       - '443:443'
     volumes:
       - ./src/nginx/conf.d:/etc/nginx/conf.d
-      # - wordpress_data:/var/www/html  # Ensure this is correctly mapped to WordPress' /var/www/html
-    # depends_on:
-    #   - wordpress
+      - wordpress_data:/var/www/html  # Shared WordPress files
+    depends_on:
+      - wordpress
     restart: always
     networks:
-      - mynetwork
-  # ----- nginx -----
+      - inception-network
+  # ----- Nginx -----
 
+# ----- wordpress -----
+  wordpress:
+    build: ./src/wordpress
+    container_name: wordpress
+    volumes:
+      - wordpress_data:/var/www/html
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
+    restart: always
+    networks:
+      - inception-network
   # ----- wordpress -----
-  # wordpress:
-  #   build: ./src/wordpress
-  #   container_name: wordpress
-  #   volumes:
-  #     - wordpress_data:/var/www/html  # WordPress files need to be shared with Nginx
-  #   environment:
-  #     WORDPRESS_DB_HOST: mariadb:3306
-  #     WORDPRESS_DB_USER: wp_user
-  #     WORDPRESS_DB_PASSWORD: wp_password
-  #     WORDPRESS_DB_NAME: wordpress
-  #   restart: always
-  #   networks:
-  #     - mynetwork
-  #   command: ["php-fpm7.4", "-F"] # Ensuring php-fpm runs as expected
-  # ----- wordpress -----
+
+  # ----- mariadb -----
+  mariadb:
+    build: ./src/mariadb
+    container_name: mariadb
+    ports:
+      - '3306:3306'
+    volumes:
+      - mariadb_data:/var/lib/mysql  # Store database data
+    env_file:
+      - .env
+    restart: always
+    networks:
+      - inception-network
+  # ----- mariadb -----
 
 networks:
-  mynetwork:
+  inception-network:
     driver: bridge
 
-# volumes:
-#   wordpress_data:
+volumes:
+  wordpress_data:
+  mariadb_data:
