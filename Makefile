@@ -18,3 +18,4 @@ logs:
 	docker-compose logs -f
 
 .PHONY: all build up down clean restart logs
+
