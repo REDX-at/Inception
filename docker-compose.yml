@@ -23,6 +23,9 @@ services:
     container_name: wordpress
     volumes:
       - wordpress_data:/var/www/html
+    secrets:
+      - db_password
+      - wp_password
     env_file:
       - .env
     depends_on:
@@ -39,7 +42,9 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - mariadb_data:/var/lib/mysql
+      - wordpress_db_data:/var/lib/mysql
+    secrets:
+      - db_password
     env_file:
       - .env
     restart: always
@@ -53,4 +58,10 @@ networks:
 
 volumes:
   wordpress_data:
-  mariadb_data:
+  wordpress_db_data:
+
+secrets:
+  db_password:
+    file: ./secrets/db_password.txt
+  wp_password:
+    file: ./secrets/wp_password.txt
