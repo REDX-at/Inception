@@ -25,7 +25,7 @@ Would you like a diagram to visualize how Docker works? 🚢
 
 Map : 
 inception/
-│── srcs/
+│── srcss/
 │   ├── nginx/
 │   │   ├── Dockerfile
 │   │   ├── conf.d/ (nginx configuration files)
@@ -100,7 +100,7 @@ CN: Common Name (usually the domai
 
   # # ----- mariadb -----
   # mariadb:
-  #   build: ./src/mariadb
+  #   build: ./srcs/requirementsmariadb
   #   container_name: mariadb
   #   environment:
   #     MYSQL_ROOT_PASSWORD: rootpassword

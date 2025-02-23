@@ -3,12 +3,12 @@ version: '3.7'
 services:
   # ----- Nginx -----
   nginx:
-    build: ./src/nginx
+    build: ./srcs/requirements/nginx
     container_name: nginx
     ports:
       - '443:443'
     volumes:
-      - ./src/nginx/conf.d:/etc/nginx/conf.d
+      - ./srcs/requirements/nginx/conf.d:/etc/nginx/conf.d
       - wordpress_data:/var/www/html
     depends_on:
       - wordpress
@@ -19,7 +19,7 @@ services:
 
 # ----- wordpress -----
   wordpress:
-    build: ./src/wordpress
+    build: ./srcs/requirements/wordpress
     container_name: wordpress
     volumes:
       - wordpress_data:/var/www/html
@@ -38,7 +38,7 @@ services:
 
   # ----- mariadb -----
   mariadb:
-    build: ./src/mariadb
+    build: ./srcs/requirements/mariadb
     container_name: mariadb
     ports:
       - '3306:3306'

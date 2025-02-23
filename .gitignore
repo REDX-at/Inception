@@ -1,0 +1,6 @@
+.env
+secrets/
+
+dp_password.txt
+wp_password.txt
+user_password.txt
