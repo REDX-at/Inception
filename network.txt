@@ -1,0 +1,56 @@
+[
+    {
+        "Name": "inception_inception-network",
+        "Id": "0eed44fb4937609b3dd2f23ba39edff32a5f8f76491f423da63b8782509ff6aa",
+        "Created": "2025-02-25T10:17:49.760057082Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.19.0.0/16",
+                    "Gateway": "172.19.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "151e6a9c9eaacc57a325d047f690e840b5362d5e6063dbeade904fd3ec27825e": {
+                "Name": "wordpress",
+                "EndpointID": "b8d041195b9f0b5a7e87811300a8bd4ab653365674371f814eaa9a4f758d3a3c",
+                "MacAddress": "02:42:ac:13:00:03",
+                "IPv4Address": "172.19.0.3/16",
+                "IPv6Address": ""
+            },
+            "4a11fc7a8c1ee1ff04f086bdb3b13445decea33623f91b8ac3cf8170a3ff0aa3": {
+                "Name": "mariadb",
+                "EndpointID": "9c8023aaa83980e2692e003f60e3fe79198f29253010b96ebc2950342cde3f56",
+                "MacAddress": "02:42:ac:13:00:02",
+                "IPv4Address": "172.19.0.2/16",
+                "IPv6Address": ""
+            },
+            "76e8f5e38d91184e3140af9350e2bb7e6be27ff5df0fd8e19b388b4ca121c8b8": {
+                "Name": "nginx",
+                "EndpointID": "3126aa8271b72450fc8072b5107133e14538ec389efee2a4119cea088f1c94fd",
+                "MacAddress": "02:42:ac:13:00:04",
+                "IPv4Address": "172.19.0.4/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {
+            "com.docker.compose.network": "inception-network",
+            "com.docker.compose.project": "inception",
+            "com.docker.compose.version": "2.13.0"
+        }
+    }
+]

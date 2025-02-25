@@ -1,0 +1,11 @@
+# Use the official Alpine base image
+FROM debian:11
+
+# Install Redis
+RUN apt-get update && apt-get install -y redis
+
+# Expose the default Redis port
+EXPOSE 6379
+
+# Run Redis as the default command
+CMD ["redis-server", "--protected-mode", "no"]
