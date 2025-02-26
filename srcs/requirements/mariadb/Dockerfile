@@ -9,7 +9,7 @@ RUN mkdir -p /var/lib/mysql && chown -R mysql:mysql /var/lib/mysql
 # Set up MariaDB configuration (optional: custom my.cnf)
 COPY my.cnf /etc/mysql/my.cnf
 
-COPY init-mariadb.sh .
+COPY ./tools/init-mariadb.sh .
 
 # run The script to initialize the database
 RUN chmod +x init-mariadb.sh

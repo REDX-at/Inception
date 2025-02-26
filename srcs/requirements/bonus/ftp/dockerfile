@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y vsftpd && rm -rf /var/lib/apt/lists/*
 
 COPY vsftpd.conf /etc/vsftpd.conf
 
-COPY ftp.sh .
+COPY ./tools/ftp.sh .
 
 RUN chmod +x ftp.sh
 
