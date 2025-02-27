@@ -4,7 +4,7 @@ services:
   # ----- Nginx ----- #
   nginx:
     build: ./srcs/requirements/nginx
-    image: nginx
+    image: nginx:inception
     container_name: nginx
     ports:
       - '443:443'
@@ -21,7 +21,7 @@ services:
 # ----- wordpress ----- #
   wordpress:
     build: ./srcs/requirements/wordpress
-    image: wordpress
+    image: wordpress:inception
     container_name: wordpress
     volumes:
       - wordpress_data:/var/www/html
@@ -37,7 +37,7 @@ services:
   # ----- mariadb ----- #
   mariadb:
     build: ./srcs/requirements/mariadb
-    image: mariadb
+    image: mariadb:inception
     container_name: mariadb
     ports:
       - '3306:3306'
@@ -52,7 +52,7 @@ services:
   # ----- redis ----- #
   redis:
     build: ./srcs/requirements/bonus/redis
-    image: redis
+    image: redis:inception
     container_name: redis
     ports:
       - '6379:6379'
@@ -67,7 +67,7 @@ services:
   # ----- ftp ----- #
   ftp:
     build: ./srcs/requirements/bonus/ftp
-    image: ftp
+    image: ftp:inception
     container_name: ftp
     ports:
       - '21:21'
@@ -77,6 +77,17 @@ services:
     env_file:
       - .env
     restart: always
+    networks:
+      - inception-network
+
+  # ----- website ----- #
+  website:
+    build: ./srcs/requirements/bonus/website
+    image: website:inception
+    container_name: website
+    restart: always
+    ports:
+      - '8080:80'
     networks:
       - inception-network
 
