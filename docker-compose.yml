@@ -102,6 +102,23 @@ services:
     networks:
       - inception-network
 
+  # ----- portainer ----- #
+  portainer:
+    build: ./srcs/requirements/bonus/portainer
+    container_name: portainer
+    image: portainer:inception
+    restart: always
+    ports:
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock 
+      - portainer_data:/data
+    networks:
+      - inception-network
+    depends_on:
+      - mariadb
+
+
 networks:
   inception-network:
     driver: bridge
@@ -110,3 +127,4 @@ volumes:
   wordpress_data:
   wordpress_db_data:
   redis_data:
+  portainer_data:
