@@ -1,0 +1,13 @@
+FROM debian:11
+
+RUN apt update && apt upgrade -y
+
+RUN apt install -y php php-mysql wget
+
+COPY ./tools/adminer.sh /adminer.sh
+
+EXPOSE 8080
+
+RUN chmod +x /adminer.sh
+
+CMD ["/adminer.sh"]

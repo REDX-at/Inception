@@ -87,7 +87,18 @@ services:
     container_name: website
     restart: always
     ports:
-      - '8080:80'
+      - '8000:80'
+    networks:
+      - inception-network
+
+  # ----- adminer ----- #
+  adminer:
+    build: ./srcs/requirements/bonus/adminer
+    image: adminer:inception
+    container_name: adminer
+    restart: always
+    ports:
+      - '8080:8080'
     networks:
       - inception-network
 
