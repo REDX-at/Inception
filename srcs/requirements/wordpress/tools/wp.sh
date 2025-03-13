@@ -7,6 +7,8 @@ wp config create --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASS --dbhost=
 wp core install --url=$WP_URL --title=$WP_TITLE --admin_user=$WP_USER --admin_password=$WP_PASS --admin_email=$WP_EMAIL --path=/var/www/html --allow-root
 wp user create $USER $MAIL --role=$ROLE --user_pass=$PASS --allow-root
 
+sed -i 's|listen = /run/php/php7.4-fpm.sock|listen = 9000|' /etc/php/7.4/fpm/pool.d/www.conf
+
 wp plugin install redis-cache --activate --allow-root
 
 wp config set WP_REDIS_HOST 'redis' --allow-root
