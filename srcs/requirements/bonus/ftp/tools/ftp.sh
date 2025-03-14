@@ -8,4 +8,3 @@ chmod -R 755 /var/www/html
 mkdir -p /var/run/vsftpd/empty
 
 vsftpd /etc/vsftpd.conf
-
