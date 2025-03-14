@@ -1,6 +1,5 @@
-.env
-secrets/
+# .env
 
-dp_password.txt
-wp_password.txt
-user_password.txt
+.gitignore
+.DS_Store
+
