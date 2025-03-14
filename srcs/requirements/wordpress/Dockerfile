@@ -14,8 +14,6 @@ RUN mkdir -p /var/www/html /run/php
 
 RUN chown -R www-data:www-data /var/www/html
 
-# COPY custom-www.conf /etc/php/7.4/fpm/pool.d/www.conf
-
 EXPOSE 9000
 
 COPY ./tools/wp.sh .
