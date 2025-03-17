@@ -130,3 +130,5 @@ volumes:
   wordpress_db_data:
   redis_data:
   portainer_data:
+
+# all service
