@@ -19,8 +19,6 @@ clean: down
 	rm -rf /home/aitaouss/data
 
 remove:
-	chmod -R u+w /home/aitaouss/data
 	rm -rf /home/aitaouss/data
 
 restart: down up
-
