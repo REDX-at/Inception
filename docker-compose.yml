@@ -127,8 +127,29 @@ networks:
 
 volumes:
   wordpress_data:
-  wordpress_db_data:
-  redis_data:
-  portainer_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/aitaouss/data/wordpress
+      o: bind
 
-# all service
+  wordpress_db_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/aitaouss/data/mariadb
+      o: bind
+
+  redis_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/aitaouss/data/redis
+      o: bind
+
+  portainer_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/aitaouss/data/portainer
+      o: bind
